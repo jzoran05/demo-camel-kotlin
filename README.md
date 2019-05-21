@@ -1,4 +1,10 @@
-# Camel Console Example
+# TOC
+- Camel Console Example
+- AMQP qpid client JMS for AMQP (to test connectivity to Azure IoT Hub)
+- AMQP qpid Proton (Reactive) client (to test connectivity to Azure IoT Hub)
+- AMQP Camel component (test options to connect to Azure IoT Hub)
+
+## Camel Console Example
 
 ### Introduction
 
