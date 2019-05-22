@@ -7,7 +7,7 @@ package org.apache.qpid.example.azureiot;
 
 import com.microsoft.azure.servicebus.primitives.ConnectionStringBuilder;
 import org.apache.commons.cli.*;
-import org.apache.log4j.*;
+import org.apache.logging.log4j.Logger;
 
 import javax.jms.*;
 import javax.naming.Context;
@@ -28,7 +28,7 @@ public class JmsQueueQuickstart {
     //Tracking counter for how many messages have been received; used as termination condition
     private static AtomicInteger totalReceived = new AtomicInteger(0);
     // log4j logger
-    private static Logger logger = Logger.getRootLogger();
+    private static Logger logger = org.apache.logging.log4j.LogManager.getLogger();
 
     public void run(String connectionString) throws Exception {
 
