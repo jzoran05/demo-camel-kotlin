@@ -7,8 +7,6 @@ import java.time.Duration
 import com.microsoft.azure.eventhubs.EventData
 
 
-
-
 class AmqpTopicEventHubsSdkClient {
 
 
@@ -24,7 +22,7 @@ class AmqpTopicEventHubsSdkClient {
 
         var ehClient = EventHubClient.createSync(connStr.toString(), executor)
 
-        val partitionId = "0"
+        val partitionId = "1"
 
         val receiver = ehClient.createReceiverSync(
             EventHubClient.DEFAULT_CONSUMER_GROUP_NAME,
