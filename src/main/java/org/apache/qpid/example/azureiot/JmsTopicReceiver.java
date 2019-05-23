@@ -35,7 +35,7 @@ public class JmsTopicReceiver {
             ConnectionFactory factory = (ConnectionFactory) context.lookup("myFactoryLookup");
             Destination queue = (Destination) context.lookup("myTopicLookup");
 
-            Connection connection = factory.createConnection("iothubowner", "6f2W/C/Hz5TuS0X6UuiJw6MUQiwrMI0JmYXB5DoYZ00=");
+            Connection connection = factory.createConnection("iothubowner", "...");
             //Connection connection = factory.createConnection(System.getProperty("USER"), System.getProperty("PASSWORD"));
             connection.setExceptionListener(new MyExceptionListener());
             connection.start();

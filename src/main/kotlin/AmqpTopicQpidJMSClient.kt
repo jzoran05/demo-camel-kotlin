@@ -74,7 +74,7 @@ class AmqpTopicQpidJMSClient {
         val iot_hub_name = "csucsa-iot-demo"
         val hostname = "$iot_hub_name.azure-devices.net"
         val policy_name = "iothubowner" // old value service
-        val access_key = "6f2W/C/Hz5TuS0X6UuiJw6MUQiwrMI0JmYXB5DoYZ00="
+        val access_key = "..."
         val consumer_group="\$Default"
         val p_id = "0"
         val operation = "/messages/events/ConsumerGroups/$consumer_group/Partitions/$p_id"

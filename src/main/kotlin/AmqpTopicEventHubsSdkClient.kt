@@ -18,11 +18,16 @@ class AmqpTopicEventHubsSdkClient {
             .setNamespaceName("iothub-ns-csucsa-iot-1356663-1595b19cba")
             .setEventHubName("csucsa-iot-demo")
             .setSasKeyName("iothubowner")
-            .setSasKey("")
+            .setSasKey("...")
 
-        var ehClient = EventHubClient.createSync(connStr.toString(), executor)
+        // Endpoint=sb://iothub-ns-csucsa-iot-1356663-1595b19cba.servicebus.windows.net/;SharedAccessKeyName=iothubowner;SharedAccessKey=6f2W/C/Hz5TuS0X6UuiJw6MUQiwrMI0JmYXB5DoYZ00=;EntityPath=csucsa-iot-demo
+        //var ehClient = EventHubClient.createSync(connStr.toString(), executor)
+        var ehClient = EventHubClient.createSync("", executor)
 
-        val partitionId = "1"
+        val eventHubInfo = ehClient.getRuntimeInformation().get()
+        val partitionId = eventHubInfo.getPartitionIds()[0] // get first partition's id
+
+        //val partitionId = "1"
 
         val receiver = ehClient.createReceiverSync(
             EventHubClient.DEFAULT_CONSUMER_GROUP_NAME,
@@ -31,7 +36,7 @@ class AmqpTopicEventHubsSdkClient {
 //            EventPosition.fromEnqueuedTime(instant)
         )
 
-        receiver.receiveTimeout = Duration.ofSeconds(5)
+        //receiver.receiveTimeout = Duration.ofSeconds(5)
         val receivedEvents = receiver.receiveSync(10)
 
         receivedEvents?.forEach {
