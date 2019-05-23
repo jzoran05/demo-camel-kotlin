@@ -1,4 +1,4 @@
-import com.microsoft.azure.eventhubs.*;
+import com.microsoft.azure.eventhubs.*
 import java.util.concurrent.Executors
 import com.microsoft.azure.eventhubs.EventHubClient
 import com.microsoft.azure.eventhubs.EventPosition
@@ -20,7 +20,7 @@ class AmqpTopicEventHubsSdkClient {
             .setNamespaceName("iothub-ns-csucsa-iot-1356663-1595b19cba")
             .setEventHubName("csucsa-iot-demo")
             .setSasKeyName("iothubowner")
-            .setSasKey("6f2W/C/Hz5TuS0X6UuiJw6MUQiwrMI0JmYXB5DoYZ00=")
+            .setSasKey("")
 
         var ehClient = EventHubClient.createSync(connStr.toString(), executor)
 
