@@ -23,14 +23,10 @@ class AmqpTopicEventHubsSdkClient {
             .setSasKeyName("iothubowner")
             .setSasKey(saasKey)
 
-        // Endpoint=sb://iothub-ns-csucsa-iot-1356663-1595b19cba.servicebus.windows.net/;SharedAccessKeyName=iothubowner;SharedAccessKey=6f2W/C/Hz5TuS0X6UuiJw6MUQiwrMI0JmYXB5DoYZ00=;EntityPath=csucsa-iot-demo
-        //var ehClient = EventHubClient.createSync(connStr.toString(), executor)
         var ehClient = EventHubClient.createSync(connStr.toString(), executor)
 
         val eventHubInfo = ehClient.getRuntimeInformation().get()
         val partitionId = eventHubInfo.getPartitionIds()[2] // get first partition's id
-
-        //val partitionId = "1"
 
         val receiver = ehClient.createEpochReceiverSync(
             EventHubClient.DEFAULT_CONSUMER_GROUP_NAME,
@@ -61,13 +57,7 @@ class AmqpTopicEventHubsSdkClient {
             executor.shutdown()
         }
 
-        //var receivedEvents = receiver.receiveSync(450)
 
-        /*
-        receivedEvents?.forEach {
-            println("The element is $it")
-        }
-         */
 
         println("Receiving completed...")
 
