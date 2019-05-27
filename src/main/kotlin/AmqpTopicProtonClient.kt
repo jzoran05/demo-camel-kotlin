@@ -8,38 +8,38 @@ import javax.jms.Session
 import javax.naming.Context
 import javax.naming.InitialContext
 
+/**
+ * status: connection is working but still no data processed.
+ */
 class AmqpTopicProtonClient {
 
     fun receiveAmqp(connection: String) {
 
         val csb = ConnectionStringBuilder(connection)
-        val totalReceived = AtomicInteger(0)
+
         val hashtable = Hashtable<String, String>()
         hashtable["connectionfactory.SBCF"] = "amqps://" + csb.getEndpoint().getHost() + "?amqp.idleTimeout=120000&amqp.traceFrames=true"
-        hashtable["topic.TOPIC"] = "/messages/events/ConsumerGroups/\$Default/Partitions/0"
+        hashtable["topic.TOPIC"] = "csucsa-iot-demo/ConsumerGroups/\$Default/Partitions/2" // <EventHubName>/ConsumerGroups/<ConsumerGroupName>/Partitions/<PartitionNumber>
         hashtable[Context.INITIAL_CONTEXT_FACTORY] = "org.apache.qpid.jms.jndi.JmsInitialContextFactory"
         val context = InitialContext(hashtable)
 
         val cf = context.lookup("SBCF") as ConnectionFactory
-
-        // Look up the topic
         val topic = context.lookup("TOPIC") as Destination
-
         val connection = cf.createConnection(csb.getSasKeyName(), csb.getSasKey())
         connection.start()
-        // Create Session, no transaction, client ack
         val session = connection.createSession(false, Session.CLIENT_ACKNOWLEDGE)
-
         val consumer = session.createConsumer(topic)
 
         consumer.setMessageListener { message ->
             try {
-                println("Received message %d with sq#: %s\n" + totalReceived.incrementAndGet() + message.jmsMessageID )
+                val messageData = message.getBody(Any::class.java)
+                println("Received message: $messageData.toString()")
                 message.acknowledge()
             } catch (e: Exception) {
                 System.out.printf("%s", e.toString())
             }
         }
+        readLine()
     }
 
     companion object {

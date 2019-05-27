@@ -39,7 +39,7 @@ public class JmsTopicQuickStart  {
         // set up the JNDI context
         Hashtable<String, String> hashtable = new Hashtable<>();
         hashtable.put("connectionfactory.SBCF", "amqps://" + csb.getEndpoint().getHost() + "?amqp.idleTimeout=120000&amqp.traceFrames=true");
-        hashtable.put("topic.TOPIC", "/messages/events/ConsumerGroups/$Default/Partitions/1");
+        hashtable.put("topic.TOPIC", "ConsumerGroups/$Default/Partitions/1");
         //hashtable.put("queue.SUBSCRIPTION1", "BasicTopic/Subscriptions/Subscription1");
         //hashtable.put("queue.SUBSCRIPTION2", "BasicTopic/Subscriptions/Subscription2");
         //hashtable.put("queue.SUBSCRIPTION3", "BasicTopic/Subscriptions/Subscription3");
@@ -51,34 +51,7 @@ public class JmsTopicQuickStart  {
         // Look up the topic
         Destination topic = (Destination) context.lookup("TOPIC");
 
-/*
-        // we create a scope here so we can use the same set of local variables cleanly
-        // again to show the receive side seperately with minimal clutter
-        {
-            // Create Connection
-            Connection connection = cf.createConnection(csb.getSasKeyName(), csb.getSasKey());
-            connection.start();
-            // Create Session, no transaction, client ack
-            Session session = connection.createSession(false, Session.CLIENT_ACKNOWLEDGE);
 
-            // Create producer
-            MessageProducer producer = session.createProducer(topic);
-
-            // Send messaGES
-            for (int i = 0; i < totalSend; i++) {
-                BytesMessage message = session.createBytesMessage();
-                message.writeBytes(String.valueOf(i).getBytes());
-                producer.send(message);
-                System.out.printf("Sent message %d.\n", i + 1);
-            }
-
-            producer.close();
-            session.close();
-            connection.stop();
-            connection.close();
-        }
-
-*/
         // Look up the subscription (pretending it's a queue)
         receiveFromSubscription(csb, context, cf, "TOPIC");
         //receiveFromSubscription(csb, context, cf, "SUBSCRIPTION2");

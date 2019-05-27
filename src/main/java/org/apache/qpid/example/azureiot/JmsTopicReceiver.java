@@ -28,7 +28,7 @@ public class JmsTopicReceiver {
 
         try {
             // The configuration for the Qpid InitialContextFactory has been supplied in
-            // a jndi.properties file in the classpath, which results in it being picked
+            // a jndi.properties2 file in the classpath, which results in it being picked
             // up automatically by the InitialContext constructor.
             Context context = new InitialContext();
 

@@ -77,14 +77,14 @@ class AmqpTopicQpidJMSClient {
         val access_key = "..."
         val consumer_group="\$Default"
         val p_id = "0"
-        val operation = "/messages/events/ConsumerGroups/$consumer_group/Partitions/$p_id"
+        val operation = "ConsumerGroups/$consumer_group/Partitions/$p_id"
         val username = "$policy_name@sas.root.$iot_hub_name"
         val sas_token = generate_sas_token(hostname, access_key, policy_name)
 
 
         val hashtable = Hashtable<String, String>()
         hashtable["connectionfactory.myFactoryLookup"] = "amqps://$policy_name:$sas_token@$hostname"
-        hashtable["topic.myTopicLookup"] = "/messages/events/ConsumerGroups/\$Default/Partitions/0"
+        hashtable["topic.myTopicLookup"] = "ConsumerGroups/\$Default/Partitions/0"
         hashtable[Context.INITIAL_CONTEXT_FACTORY] = "org.apache.qpid.jms.jndi.JmsInitialContextFactory"
         val context = InitialContext(hashtable)
 

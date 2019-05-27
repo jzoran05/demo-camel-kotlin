@@ -45,3 +45,6 @@ Y
 )src/main/kotlin/AmqpTopicQpidJMSClient.kt,2\a\2a2d240a0e532c287dfa516bb52839bc567db311
 ^
 .src/main/kotlin/AmqpTopicEventHubsSdkClient.kt,7\3\73e07d82edea1384638c7cf26addbbe941c5561d
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
